@@ -1,9 +1,9 @@
 (function() {
-    function seekBar($document) {
+    function seekBar($document) { // DOM object $document is added here to be used in the trackThumb function
 
         /**
          * @function calculatePercent
-         * @desc Calculates the horizontal percent along the seek bar where the event (passed in from the view as $event) occurred.
+         * @desc Calculates the horizontal percent (from left to right) along the seek bar where the event (passed in from the view as $event) occurred.
          * @param {Object} seekBar
          */
         var calculatePercent = function(seekBar, event) {
@@ -23,13 +23,11 @@
             link: function(scope, element, attributes) {
                 /**
                  * @desc Holds the value of the seek bar, such as the currently playing song time or the current volume. Default value is 0.
-                 * @type {Attribute}
                  */
                 scope.value = 0;
 
                 /**
                  * @desc Holds the maximum value of the song and volume seek bars. Default value is 100.
-                 * @type {Attribute}
                  */
                 scope.max = 100;
 
@@ -41,7 +39,7 @@
 
                 /**
                  * @function percentString
-                 * @desc Calculates a percent based on the value and maximum value of a seek bar.
+                 * @desc Calculates a percent based on the value (from the left) and maximum value (to the right) of the seek bar.
                  */
                 var percentString = function() {
                     var value = scope.value;
@@ -57,6 +55,16 @@
                 scope.fillStyle = function() {
                     return {
                         width: percentString()
+                    };
+                };
+
+                /**
+                 * @function thumbStyle
+                 * @desc Returns the placement of the seek bar thumb based on the calculated percent.
+                 */
+                scope.thumbStyle = function() {
+                    return {
+                        left: percentString()
                     };
                 };
 
