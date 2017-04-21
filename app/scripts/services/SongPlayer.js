@@ -16,11 +16,17 @@
          */
         var currentBuzzObject = null;
 
+        /**
+         * @desc Holds the value of the volume (default value is 80)
+         * @type {Number}
+         */
+        SongPlayer.volume = 80;
+
         // PRIVATE FUNCTIONS
 
         /**
          * @function setSong
-         * @desc Stops currently playing song and loads new audio file as currentBuzzObject. Also keeps track of the time that has passed for the currentBuzzObject, constantly updating the time via $apply and broadcasting it to the rest of the app via $rootScope
+         * @desc Stops currently playing song and loads new audio file as currentBuzzObject — also keeps track of the time that has passed for the currentBuzzObject, constantly updating the time via $apply and broadcasting it to the rest of the app via $rootScope
          * @param {Object} song
          */
         var setSong = function(song) {
@@ -161,6 +167,18 @@
             if (currentBuzzObject) {
                 currentBuzzObject.setTime(time);
             }
+        };
+
+        /**
+         * @function setVolume
+         * @desc Change the value of the volume
+         * @param {Number} volume
+         */
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
         };
 
         return SongPlayer;
