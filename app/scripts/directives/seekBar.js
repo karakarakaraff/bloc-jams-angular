@@ -19,27 +19,43 @@
             templateUrl: '/templates/directives/seek_bar.html',
             replace: true,
             restrict: 'E',
-            scope: {},
+            scope: {
+                onChange: '&'
+            },
             link: function(scope, element, attributes) {
                 /**
-                 * @desc Holds the value of the seek bar, such as the currently playing song time or the current volume. Default value is 0.
+                 * @desc Holds the value of the seek bar, such as the currently playing song time or the current volume (default value is 0)
                  */
                 scope.value = 0;
 
                 /**
-                 * @desc Holds the maximum value of the song and volume seek bars. Default value is 100.
+                 * @desc Holds the maximum value of the song and volume seek bars (default value is 100)
                  */
                 scope.max = 100;
 
                 /**
-                 * @desc Holds the element that matches the directive (<seek-bar>) as a jQuery object so that jQuery methods can be called on it.
+                 * @desc Holds the element that matches the directive (<seek-bar>) as a jQuery object so that jQuery methods can be called on it
                  * @type {Object}
                  */
                 var seekBar = $(element);
 
                 /**
+                 * @desc Updates the value of scope.value from the default value (0) to the current value
+                 */
+                attributes.$observe('value', function(newValue) {
+                    scope.value = newValue;
+                });
+
+                /**
+                 * @desc Updates the value of scope.max from the default value (100) to the current value
+                 */
+                attributes.$observe('max', function(newValue) {
+                    scope.max = newValue;
+                });
+
+                /**
                  * @function percentString
-                 * @desc Calculates a percent based on the value (from the left) and maximum value (to the right) of the seek bar.
+                 * @desc Calculates a percent based on the value (from the left) and maximum value (to the right) of the seek bar
                  */
                 var percentString = function() {
                     var value = scope.value;
@@ -50,7 +66,7 @@
 
                 /**
                  * @function fillStyle
-                 * @desc Returns the width of the seek bar fill element based on the calculated percent.
+                 * @desc Returns the width of the seek bar fill element based on the calculated percent
                  */
                 scope.fillStyle = function() {
                     return {
@@ -60,7 +76,7 @@
 
                 /**
                  * @function thumbStyle
-                 * @desc Returns the placement of the seek bar thumb based on the calculated percent.
+                 * @desc Returns the placement of the seek bar thumb based on the calculated percent
                  */
                 scope.thumbStyle = function() {
                     return {
@@ -70,22 +86,24 @@
 
                 /**
                  * @function onClickSeekBar
-                 * @desc Updates the seek bar value based on the seek bar's width and the location of the user's click on the seek bar.
+                 * @desc Updates the seek bar value based on the seek bar's width and the location of the user's click on the seek bar
                  */
                 scope.onClickSeekBar = function(event) {
                     var percent = calculatePercent(seekBar, event);
                     scope.value = percent * scope.max;
+                    notifyOnChange(scope.value);
                 };
 
                 /**
                  * @function trackThumb
-                 * @desc Similar to scope.onClickSeekBar, but uses $apply to constantly apply the change in value of  scope.value as the user drags the seek bar thumb.
+                 * @desc Similar to scope.onClickSeekBar, but uses $apply to constantly apply the change in value of  scope.value as the user drags the seek bar thumb
                  */
                 scope.trackThumb = function() {
                     $document.bind('mousemove.thumb', function(event) {
                         var percent = calculatePercent(seekBar, event);
                         scope.$apply(function() {
                             scope.value = percent * scope.max;
+                            notifyOnChange(scope.value);
                         });
                     });
 
@@ -93,6 +111,18 @@
                         $document.unbind('mousemove.thumb');
                         $document.unbind('mouseup.thumb');
                     });
+                };
+
+                /**
+                 * @function notifyOnChange
+                 * @desc Sends the updated value of scope.value to the seek bar so that OnChange will update with the same value (see <seek-bar on-change>)
+                 */
+                var notifyOnChange = function(newValue) {
+                    if (typeof scope.onChange === 'function') {
+                        scope.onChange({
+                            value: newValue
+                        });
+                    }
                 };
             }
         };
