@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="blocJams">
-<head lang="en" >
+
+<head lang="en">
     <meta charset="UTF-8">
     <title>Bloc Jams Angular</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="styles/album.css">
     <link rel="stylesheet" type="text/css" href="styles/player_bar.css">
 </head>
+
 <body>
     <nav class="navbar">
         <a ui-sref="landing" class="logo">
@@ -23,12 +25,19 @@
         </div>
     </nav>
     <ui-view></ui-view>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
     <script src="/scripts/app.js"></script>
-    <script src="/scripts/fixtures.js"></script>
+    <script src="/scripts/services/Fixtures.js"></script>
+    <script src="/scripts/services/SongPlayer.js"></script>
     <script src="/scripts/controllers/LandingCtrl.js"></script>
     <script src="/scripts/controllers/CollectionCtrl.js"></script>
     <script src="/scripts/controllers/AlbumCtrl.js"></script>
+    <script src="/scripts/controllers/PlayerBarCtrl.js"></script>
+    <script src="/scripts/directives/seekBar.js"></script>
+    <script src="/scripts/filters/timecode.js"></script>
 </body>
+
 </html>
