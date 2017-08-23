@@ -1,3 +1,4 @@
-## Bloc Frontend Project Starter
+## Bloc Jams
+Bloc Jams is a streaming music website that puts all of your favorite tunes in an easy-to-use library.
 
-A starter application for student projects in Bloc's [Frontend Web Development Course](https://www.bloc.io/frontend-development-bootcamp).
+This project was made for [Bloc's Web Development Program](https://www.bloc.io/).
