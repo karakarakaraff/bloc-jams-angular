@@ -1,6 +1,6 @@
 # Bloc Jams Angular
 
-Bloc Jams Angular is a streaming music web app that puts all of your favorite tunes in an easy-to-use library. This project is a reworked version of the original [Bloc Jams](https://github.com/karakarakaraff/bloc-jams). Made for [Bloc's Web Development Program](https://www.bloc.io/).
+Bloc Jams Angular is a streaming music web app that puts all of your favorite tunes in an easy-to-use library. This project is a reworked version of the original [Bloc Jams](https://github.com/karakarakaraff/bloc-jams). Read a case study about building this project on my portfolio website at [karaflaherty.com: Bloc Jams](http://karaflaherty.com/bloc-jams-streaming-music-website-and-web-app/). 
 
 ### Music library
 All items in the music library are organized through the `app/services/Fixtures.js` file. Each album is its own object, with the album cover and songs saved in `assets/images/album_covers` and `assets/music` respectively. All album information must be filled out following this format:
@@ -51,3 +51,6 @@ var playSong = function(song) {
   song.playing = true;
 };
 ```
+
+---
+This project was built for [Bloc's Web Development Program](https://www.bloc.io/).
